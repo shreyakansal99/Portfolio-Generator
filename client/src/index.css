@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* Portfolio theming: the accent color comes from the --accent variable */
+.portfolio-theme .text-indigo-600,
+.portfolio-theme .text-indigo-700,
+.portfolio-theme .hover\:text-indigo-600:hover {
+  color: var(--accent);
+}
+.portfolio-theme .bg-indigo-50 {
+  background-color: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.font-elegant {
+  font-family: "Playfair Display", Georgia, serif;
+  font-variant-numeric: lining-nums;
+}
+
+/* Section heading underline and bullet points use the accent too */
+.portfolio-theme h2.border-b {
+  border-bottom-color: var(--accent);
+}
+.portfolio-theme li::marker {
+  color: var(--accent);
+}
+
+/* Dark mode */
+.portfolio-dark {
+  background-color: #0f172a;
+}
+.portfolio-dark .text-slate-900 {
+  color: #f8fafc;
+}
+.portfolio-dark .text-slate-700,
+.portfolio-dark .text-slate-600 {
+  color: #cbd5e1;
+}
+.portfolio-dark .text-slate-500 {
+  color: #94a3b8;
+}
+.portfolio-dark .border-slate-200 {
+  border-color: #334155;
+}
+.portfolio-dark .bg-slate-100 {
+  background-color: #1e293b;
+}
+
+
+/* Warm template */
+.tpl-warm {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 90% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 50%),
+    radial-gradient(circle at 0% 60%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 45%),
+    #fff8f4;
+}
+.portfolio-dark .tpl-warm {
+  background:
+    radial-gradient(circle at 90% 0%, color-mix(in srgb, var(--accent) 25%, transparent), transparent 50%),
+    #0f172a;
+}
+.warm-card {
+  background: rgb(255 255 255 / 0.7);
+  border: 1px solid rgb(15 23 42 / 0.06);
+  backdrop-filter: blur(8px);
+}
+.portfolio-dark .warm-card {
+  background: rgb(30 41 59 / 0.7);
+  border-color: #334155;
+}
+
+
+/* Creative template */
+.tpl-creative {
+  --panel: color-mix(in srgb, var(--accent) 55%, black);
+  --peach: #f9a98b;
+  --peach-ink: #ee8a66;
+  --sun: #fbd46d;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #fff4ec;
+}
+.portfolio-dark .tpl-creative {
+  background-color: #0f172a;
+}
+.c-ink {
+  color: var(--panel);
+}
+.portfolio-dark .c-ink {
+  color: #f8fafc;
+}
+.c-card {
+  background-color: #fffaf6;
+  border: 1px solid rgb(15 23 42 / 0.06);
+}
+.portfolio-dark .c-card {
+  background-color: rgb(30 41 59 / 0.7);
+  border-color: #334155;
+}
+.font-display {
+  font-family: "Fraunces", Georgia, serif;
+}
+.font-script {
+  font-family: "Caveat", cursive;
+}
+
+
+/* Dark template */
+.tpl-dark {
+  --accent-soft: color-mix(in srgb, var(--accent) 60%, white);
+  min-height: 100vh;
+  color: #cbd5e1;
+  background:
+    radial-gradient(circle at 80% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 45%),
+    #070b1a;
+}
+.d-card {
+  background: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+.d-code {
+  background: rgb(8 12 28 / 0.92);
+  border: 1px solid rgb(255 255 255 / 0.1);
+}
+.d-grad {
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #c084fc));
+}
+/* Lighter accent for text on the dark background */
+.tpl-dark .text-indigo-600,
+.tpl-dark .text-indigo-700,
+.tpl-dark .hover\:text-indigo-600:hover {
+  color: var(--accent-soft);
+}
+
+/* Dark template: code card hover */
+.d-code {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.3s ease,
+    opacity 0.25s ease;
+}
+
+.d-code:hover {
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 0 1px var(--accent-soft),
+    0 12px 40px color-mix(in srgb, var(--accent) 15%, transparent);
+  transform: translateY(-4px);
+  opacity: 0.9;
+}
+
+/* Hover effects */
+.hl {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease,
+    transform 0.3s ease;
+}
+.warm-card.hl:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 14px 34px rgb(15 23 42 / 0.12);
+}
+.c-card.hl:hover {
+  border-color: var(--panel);
+  box-shadow: 0 0 0 1px var(--panel), 0 14px 34px rgb(15 23 42 / 0.14);
+}
+.d-card.hl:hover {
+  border-color: var(--accent-soft);
+  background: rgb(255 255 255 / 0.08);
+  box-shadow: 0 0 0 1px var(--accent-soft),
+    0 12px 40px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* Footer icons: the round container fills on hover */
+.icon-hl,
+.icon-hl-c {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.icon-hl:hover,
+.icon-link:hover .icon-hl {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.icon-hl-c:hover,
+.icon-link:hover .icon-hl-c {
+  background-color: var(--peach);
+  border-color: var(--peach);
+  color: var(--panel);
+}
+
+/* Creative template: faint vertical lines between the stats */
+@media (min-width: 768px) {
+  .stat-divide > * + * {
+    border-left: 1px solid color-mix(in srgb, var(--panel) 25%, transparent);
+  }
+}
