@@ -21,13 +21,7 @@ const emptyItem: Education = {
 };
 
 export default function EducationForm({ defaultValues, onSave }: Props) {
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({ defaultValues: { items: defaultValues } });
-
+  const { register, control, handleSubmit, formState: { errors } } = useForm<FormValues>({ defaultValues: { items: defaultValues } });
   const { fields, append, remove } = useFieldArray({ control, name: "items" });
 
   return (
@@ -42,9 +36,7 @@ export default function EducationForm({ defaultValues, onSave }: Props) {
             <div className="md:col-span-2">
               <label className={labelClass}>Institution</label>
               <input
-                {...register(`items.${index}.institution`, {
-                  required: "Institution is required",
-                })}
+                {...register(`items.${index}.institution`, { required: "Institution is required" })}
                 className={inputClass}
               />
               {errors.items?.[index]?.institution && (

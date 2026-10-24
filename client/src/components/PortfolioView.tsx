@@ -4,16 +4,8 @@ import WarmTemplate from "./templates/WarmTemplate";
 import CreativeTemplate from "./templates/CreativeTemplate";
 import DarkTemplate from "./templates/DarkTemplate";
 
-export default function PortfolioView({
-  data,
-  photoUrl,
-  theme = defaultTheme,
-}: {
-  data: PortfolioData;
-  photoUrl?: string;
-  theme?: Theme;
-}) {
-    const Template =
+export default function PortfolioView({ data, photoUrl, theme = defaultTheme }: { data: PortfolioData; photoUrl?: string; theme?: Theme; }) {
+  const Template =
     theme.template === "creative"
       ? CreativeTemplate
       : theme.template === "dark"

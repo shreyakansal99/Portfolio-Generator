@@ -1,19 +1,6 @@
 import type { ReactNode } from "react";
-import type {
-  Certification,
-  Education,
-  Experience,
-  PortfolioData,
-  Project,
-} from "../../types/portfolio";
-import {
-  GitHubIcon,
-  GlobeIcon,
-  LinkedInIcon,
-  MailIcon,
-  MapPinIcon,
-  PhoneIcon,
-} from "../Icons";
+import type { Certification, Education, Experience, PortfolioData, Project } from "../../types/portfolio";
+import { GitHubIcon, GlobeIcon, LinkedInIcon, MailIcon, MapPinIcon, PhoneIcon } from "../Icons";
 
 export interface TemplateProps {
   data: PortfolioData;
@@ -43,26 +30,20 @@ const WRAP: Record<Variant, string> = {
   compact: "mt-8",
   card: "mt-8 rounded-2xl border border-slate-200 p-6",
 };
+
 const HEADING: Record<Variant, string> = {
   default: "text-xl",
   compact: "text-xs uppercase tracking-wider",
   card: "text-lg",
 };
+
 const BODY: Record<Variant, string> = {
   default: "mt-6 space-y-6",
   compact: "mt-3 space-y-3",
   card: "mt-5 space-y-5",
 };
 
-export function Section({
-  title,
-  children,
-  variant = "default",
-}: {
-  title: string;
-  children: ReactNode;
-  variant?: Variant;
-}) {
+export function Section({ title, children, variant = "default" }: { title: string; children: ReactNode; variant?: Variant; }) {
   return (
     <section className={WRAP[variant]}>
       <h2 className={`border-b border-slate-200 pb-2 font-bold text-slate-900 ${HEADING[variant]}`}>
@@ -73,15 +54,8 @@ export function Section({
   );
 }
 
-export function ContactItems({
-  personal,
-  iconClass = "text-indigo-600",
-  linkClass = "hover:text-indigo-600",
-}: {
-  personal: PortfolioData["personal"];
-  iconClass?: string;
-  linkClass?: string;
-}) {
+export function ContactItems({ personal, iconClass = "text-indigo-600", linkClass = "hover:text-indigo-600" }: {
+  personal: PortfolioData["personal"]; iconClass?: string; linkClass?: string; }) {
   const links = [
     { label: "LinkedIn", url: personal.linkedin, icon: <LinkedInIcon /> },
     { label: "GitHub", url: personal.github, icon: <GitHubIcon /> },

@@ -73,10 +73,7 @@ export default function ProjectImageUpload({ url, onChange }: Props) {
           {url && (
             <button
               type="button"
-              onClick={() => {
-                onChange("");
-                setAdded(false);
-              }}
+              onClick={() => { onChange(""); setAdded(false); }}
               className="px-2 text-sm font-medium text-red-600 hover:underline"
             >
               Remove

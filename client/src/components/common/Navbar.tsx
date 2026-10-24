@@ -22,10 +22,7 @@ export default function Navbar() {
             <Link to="/dashboard" className="text-slate-700 hover:text-indigo-600">
               Dashboard
             </Link>
-            <button
-              onClick={handleLogout}
-              className="rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
-            >
+            <button onClick={handleLogout} className="rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700">
               Logout
             </button>
           </>
@@ -34,10 +31,7 @@ export default function Navbar() {
             <Link to="/login" className="text-slate-700 hover:text-indigo-600">
               Login
             </Link>
-            <Link
-              to="/register"
-              className="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500"
-            >
+            <Link to="/register" className="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500">
               Get Started
             </Link>
           </>

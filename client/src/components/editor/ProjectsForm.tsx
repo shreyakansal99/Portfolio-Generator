@@ -24,14 +24,7 @@ interface FormValues {
 const emptyItem: Item = { name: "", description: "", tech: "", github: "", live: "", image: "" };
 
 export default function ProjectsForm({ defaultValues, onSave }: Props) {
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm<FormValues>({
+  const { register, control, handleSubmit, watch, setValue, formState: { errors } } = useForm<FormValues>({
     defaultValues: {
       items: defaultValues.map((p) => ({ ...p, image: p.image ?? "", tech: p.tech.join(", ") })),
     },

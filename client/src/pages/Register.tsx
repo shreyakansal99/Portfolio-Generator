@@ -12,13 +12,7 @@ interface RegisterForm {
 }
 
 export default function Register() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isSubmitting },
-  } = useForm<RegisterForm>();
-
+  const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<RegisterForm>();
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [serverError, setServerError] = useState("");

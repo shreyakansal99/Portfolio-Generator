@@ -1,33 +1,8 @@
 import type { ReactNode } from "react";
-import {
-  AwardIcon,
-  BriefcaseIcon,
-  FolderIcon,
-  GitHubIcon,
-  GlobeIcon,
-  LinkedInIcon,
-  MailIcon,
-  MapPinIcon,
-  PhoneIcon,
-  StarIcon,
-} from "../Icons";
-import {
-  CertificationList,
-  EducationList,
-  ExperienceList,
-  SkillChips,
-  toHref,
-  formatCount,
-  type TemplateProps,
-} from "./parts";
+import { AwardIcon, BriefcaseIcon, FolderIcon, GitHubIcon, GlobeIcon, LinkedInIcon, MailIcon, MapPinIcon, PhoneIcon, StarIcon } from "../Icons";
+import { CertificationList, EducationList, ExperienceList, SkillChips, toHref, formatCount, type TemplateProps } from "./parts";
 
-function Card({
-  id,
-  eyebrow,
-  title,
-  highlight = false,
-  children,
-}: {
+function Card({ id, eyebrow, title, highlight = false, children }: {
   id?: string;
   eyebrow: string;
   title: string;
@@ -64,22 +39,10 @@ export default function WarmTemplate({ data, photoUrl }: TemplateProps) {
   ].filter(Boolean) as { label: string; href: string }[];
 
   const blocks = [
-    {
-      kind: "experience",
-      count: experience.length,
-      label: "Experience",
-      href: "#experience",
-      icon: <BriefcaseIcon />,
-    },
+    { kind: "experience", count: experience.length, label: "Experience", href: "#experience", icon: <BriefcaseIcon /> },
     { kind: "projects", count: projects.length, label: "Projects", href: "#projects", icon: <FolderIcon /> },
     { kind: "skills", count: skills.length, label: "Skills", href: "#skills", icon: <StarIcon /> },
-    {
-      kind: "certificates",
-      count: certifications.length,
-      label: "Certificates",
-      href: "#certificates",
-      icon: <AwardIcon />,
-    },
+    { kind: "certificates", count: certifications.length, label: "Certificates", href: "#certificates", icon: <AwardIcon /> },
   ].filter((b) => b.count > 0);
 
   const socials = [
@@ -170,9 +133,7 @@ export default function WarmTemplate({ data, photoUrl }: TemplateProps) {
               <div
                 aria-hidden="true"
                 className="absolute -right-6 top-10 h-full w-full rounded-[3rem]"
-                style={{
-                  backgroundColor: "color-mix(in srgb, var(--accent) 25%, white)",
-                }}
+                style={{ backgroundColor: "color-mix(in srgb, var(--accent) 25%, white)" }}
               />
               <img
                 src={photoUrl}
@@ -215,9 +176,7 @@ export default function WarmTemplate({ data, photoUrl }: TemplateProps) {
                 >
                   <span
                     className="flex h-12 w-12 items-center justify-center rounded-full text-indigo-600 [&_svg]:h-5 [&_svg]:w-5"
-                    style={{
-                      backgroundColor: "color-mix(in srgb, var(--accent) 14%, transparent)",
-                    }}
+                    style={{ backgroundColor: "color-mix(in srgb, var(--accent) 14%, transparent)" }}
                   >
                     {b.icon}
                   </span>
@@ -310,7 +269,7 @@ export default function WarmTemplate({ data, photoUrl }: TemplateProps) {
                             rel="noreferrer"
                             className="rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-900 hover:opacity-70"
                           >
-                            Demo 
+                            Demo
                           </a>
                         )}
                         {p.github && (
@@ -320,7 +279,7 @@ export default function WarmTemplate({ data, photoUrl }: TemplateProps) {
                             rel="noreferrer"
                             className="ml-auto rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-900 hover:opacity-70"
                           >
-                            Code 
+                            Code
                           </a>
                         )}
                       </div>

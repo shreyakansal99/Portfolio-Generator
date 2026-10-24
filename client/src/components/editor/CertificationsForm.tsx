@@ -14,13 +14,7 @@ interface FormValues {
 const emptyItem: Certification = { name: "", issuer: "", year: "" };
 
 export default function CertificationsForm({ defaultValues, onSave }: Props) {
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({ defaultValues: { items: defaultValues } });
-
+  const { register, control, handleSubmit, formState: { errors } } = useForm<FormValues>({ defaultValues: { items: defaultValues } });
   const { fields, append, remove } = useFieldArray({ control, name: "items" });
 
   return (

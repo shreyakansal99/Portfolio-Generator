@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { isAxiosError } from "axios";
 import api from "../api/axios";
 import PortfolioView from "../components/PortfolioView";
-import {
-  defaultTheme,
-  emptyPortfolio,
-  TEMPLATE_IDS,
-  TEMPLATE_LABELS,
-  type PortfolioData,
-  type Theme,
-} from "../types/portfolio";
+import { defaultTheme, emptyPortfolio, TEMPLATE_IDS, TEMPLATE_LABELS, type PortfolioData, type Theme } from "../types/portfolio";
 
 const slugify = (text: string) =>
   text
@@ -31,6 +24,13 @@ export default function Preview() {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const timer = useRef<number | undefined>(undefined);
+
+  const showMessage = (type: "success" | "error", text: string) => {
+    window.clearTimeout(timer.current);
+    setMessage({ type, text });
+    timer.current = window.setTimeout(() => setMessage(null), 3500);
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -64,20 +64,20 @@ export default function Preview() {
   }, []);
 
   const publish = async () => {
-    setMessage(null);
+    const wasPublished = isPublished;
     setSaving(true);
     try {
       const res = await api.patch("/portfolio/publish", { slug, isPublished: true });
       setSlug(res.data.slug);
       setIsPublished(true);
-      setMessage({ type: "success", text: "Your portfolio is live" });
+      showMessage("success", wasPublished ? "Link updated" : "Your portfolio is live");
     } catch (err) {
-      setMessage({
-        type: "error",
-        text: isAxiosError(err)
+      showMessage(
+        "error",
+        isAxiosError(err)
           ? err.response?.data?.message || "Something went wrong"
-          : "Something went wrong",
-      });
+          : "Something went wrong"
+      );
     } finally {
       setSaving(false);
     }
@@ -88,7 +88,7 @@ export default function Preview() {
     try {
       await api.patch("/portfolio/theme", next);
     } catch {
-      setMessage({ type: "error", text: "Could not save your theme" });
+      showMessage("error", "Could not save your theme");
     }
   };
 
@@ -123,8 +123,8 @@ export default function Preview() {
                   type="button"
                   onClick={() => updateTheme({ ...theme, template: id })}
                   className={`rounded-lg border px-3 py-2 text-left text-sm font-medium ${theme.template === id
-                      ? "border-indigo-600 bg-indigo-50 text-indigo-700"
-                      : "border-slate-300 text-slate-700 hover:bg-slate-50"
+                    ? "border-indigo-600 bg-indigo-50 text-indigo-700"
+                    : "border-slate-300 text-slate-700 hover:bg-slate-50"
                     }`}
                 >
                   {TEMPLATE_LABELS[id]}
@@ -240,16 +240,23 @@ export default function Preview() {
               </a>
             )}
           </div>
-
           {message && (
-            <p
-              className={`mt-2 rounded-lg px-3 py-2 text-sm ${message.type === "success"
-                  ? "bg-green-50 text-green-700"
-                  : "bg-red-50 text-red-600"
+            <div
+              role="status"
+              className={`fixed right-6 top-6 z-[60] flex items-center gap-3 rounded-xl px-5 py-3 text-sm font-medium text-white shadow-lg ${message.type === "success" ? "bg-green-600" : "bg-red-600"
                 }`}
             >
-              {message.text}
-            </p>
+              <span aria-hidden="true">{message.type === "success" ? "✓" : "!"}</span>
+              <span>{message.text}</span>
+              <button
+                type="button"
+                onClick={() => setMessage(null)}
+                aria-label="Dismiss"
+                className="ml-2 text-lg leading-none text-white/80 hover:text-white"
+              >
+                ×
+              </button>
+            </div>
           )}
         </div>
 

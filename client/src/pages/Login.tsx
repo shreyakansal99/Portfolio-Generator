@@ -10,12 +10,7 @@ interface LoginForm {
 }
 
 export default function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginForm>();
-
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginForm>();
   const { login } = useAuth();
   const navigate = useNavigate();
   const [serverError, setServerError] = useState("");
@@ -69,7 +64,7 @@ export default function Login() {
           {serverError && (
             <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">{serverError}</p>
           )}
-          
+
           <button
             type="submit"
             disabled={isSubmitting}

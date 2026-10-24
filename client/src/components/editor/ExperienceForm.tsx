@@ -30,12 +30,7 @@ const emptyItem: Item = {
 };
 
 export default function ExperienceForm({ defaultValues, onSave }: Props) {
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
+  const { register, control, handleSubmit, formState: { errors } } = useForm<FormValues>({
     defaultValues: {
       items: defaultValues.map((e) => ({ ...e, highlights: e.highlights.join("\n") })),
     },
@@ -46,11 +41,7 @@ export default function ExperienceForm({ defaultValues, onSave }: Props) {
   const submit = (values: FormValues) => {
     onSave(
       values.items.map((i) => ({
-        ...i,
-        highlights: i.highlights
-          .split("\n")
-          .map((h) => h.trim())
-          .filter(Boolean),
+        ...i, highlights: i.highlights.split("\n").map((h) => h.trim()).filter(Boolean),
       }))
     );
   };

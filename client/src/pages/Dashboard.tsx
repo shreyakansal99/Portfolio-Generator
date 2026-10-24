@@ -98,8 +98,8 @@ export default function Dashboard() {
               {message && (
                 <p
                   className={`rounded-lg px-3 py-2 text-sm ${message.type === "success"
-                      ? "bg-green-50 text-green-700"
-                      : "bg-red-50 text-red-600"
+                    ? "bg-green-50 text-green-700"
+                    : "bg-red-50 text-red-600"
                     }`}
                 >
                   {message.text}

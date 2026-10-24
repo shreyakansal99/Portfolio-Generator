@@ -161,7 +161,6 @@ export default function Upload() {
           </p>
         </div>
       )}
-
     </main>
   );
 }

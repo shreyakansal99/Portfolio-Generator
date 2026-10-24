@@ -1,13 +1,7 @@
 import { type ReactNode } from "react";
 import { GitHubIcon, GlobeIcon, LinkedInIcon, MailIcon, MapPinIcon, PhoneIcon } from "../Icons";
-import {
-  CertificationList,
-  EducationList,
-  ExperienceList,
-  toHref,
-  formatCount,
-  type TemplateProps,
-} from "./parts";
+import { CertificationList, EducationList, ExperienceList, toHref, formatCount, type TemplateProps } from "./parts";
+import { Curl, RoundBadge, Smiley, Sparkle, Squiggle, Starburst } from "./doodles";
 
 const TINTS = ["#f9a98b", "#fbd46d", "#9fd3c7"];
 
@@ -39,6 +33,7 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
     { label: "Website", url: personal.website, icon: <GlobeIcon /> },
   ].filter((s) => s.url);
 
+  const badgeText = personal.title && personal.title.length <= 24 ? personal.title : personal.name;
   const topSocials = socials.filter((s) => s.label === "LinkedIn" || s.label === "GitHub");
 
   return (
@@ -49,11 +44,28 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
         className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full"
         style={{ backgroundColor: "var(--panel)" }}
       />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-20 top-[48%] h-56 w-56 rounded-full opacity-50"
-        style={{ backgroundColor: "var(--peach)" }}
-      />
+
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden md:block">
+        <Starburst className="absolute left-[40%] top-8 h-16 w-16" />
+        <Sparkle className="twinkle absolute left-[34%] top-[22%] h-8 w-8" />
+        <Sparkle className="twinkle absolute left-[47%] top-[30%] h-5 w-5" color="var(--sun)" />
+        <div
+          className="absolute left-[41%] top-[38%] h-8 w-8 rounded-full border-[6px]"
+          style={{ borderColor: "var(--panel)" }}
+        />
+        <div
+          className="absolute -left-20 top-[58%] h-64 w-64 opacity-60"
+          style={{
+            backgroundColor: "var(--peach)",
+            borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
+          }}
+        />
+        <Curl className="absolute -right-6 top-[64%] h-40 w-40 opacity-70" />
+        <div
+          className="absolute -right-16 top-[86%] h-56 w-56 rounded-full opacity-90"
+          style={{ backgroundColor: "var(--panel)" }}
+        />
+      </div>
 
       <main className="relative z-10 mx-auto max-w-5xl px-6 pb-4 pt-12 sm:pt-16">
         {/* Hero */}
@@ -61,12 +73,19 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
           <div>
             <p className="font-display text-3xl font-semibold c-ink">Hello, I’m</p>
             <h1 className="font-display break-words text-6xl font-bold leading-[1.05] c-ink sm:text-7xl">
-              {personal.name}
+              {personal.name.split(" ").map((word, i) => (
+                <span key={i} className="block">
+                  {word}
+                </span>
+              ))}
             </h1>
             {personal.title && (
-              <p className="font-script mt-3 text-3xl" style={{ color: "var(--peach-ink)" }}>
-                {personal.title}
-              </p>
+              <div className="mt-3">
+                <p className="font-script text-3xl" style={{ color: "var(--peach-ink)" }}>
+                  {personal.title}
+                </p>
+                <Squiggle className="mt-1 h-4 w-44" />
+              </div>
             )}
             {personal.summary && (
               <p className="mt-5 max-w-md leading-relaxed text-slate-700">
@@ -123,133 +142,160 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
                   <p className="font-script text-2xl">{personal.location}</p>
                 </div>
               )}
+              <div
+                className="float-y absolute -right-6 -top-8 h-28 w-28 rounded-full shadow-lg sm:-right-10"
+                style={{ backgroundColor: "#fffaf6", color: "var(--panel)" }}
+              >
+                <RoundBadge text={badgeText} />
+              </div>
+              <Smiley className="float-y absolute -left-6 top-12 h-12 w-12" />
+              <Sparkle className="twinkle absolute -left-10 top-1/2 h-6 w-6" />
+              <Sparkle className="twinkle absolute -right-8 bottom-24 h-5 w-5" color="var(--sun)" />
             </div>
           )}
         </header>
 
         {/* Selected works */}
         {projects.length > 0 && (
-          <section
-            id="projects"
-            className="mt-24 scroll-mt-24 rounded-[2rem] p-6 text-white sm:p-10"
-            style={{ backgroundColor: "var(--panel)" }}
-          >
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <h2 className="font-display text-3xl font-bold">
-                Selected Works <span style={{ color: "var(--peach)" }}>✦</span>
-              </h2>
-            </div>
+          <div className="relative mt-24">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-14 top-10 hidden h-32 w-32 rounded-full opacity-70 md:block"
+              style={{ backgroundColor: "var(--peach)" }}
+            />
 
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.map((p, i) => (
-                <article
-                  key={`${p.name}-${i}`}
-                  className="relative flex flex-col overflow-hidden rounded-2xl border-2 border-transparent transition duration-300 hover:z-10 hover:scale-[1.03] hover:border-[color:var(--accent)] hover:shadow-xl"
-                  style={{ backgroundColor: "#fff4ec", color: "var(--panel)" }}
-                >
-                  <div
-                    className="relative flex h-36 items-end overflow-hidden p-5"
-                    style={{ backgroundColor: TINTS[i % TINTS.length] }}
+            <section
+              id="projects"
+              className="relative scroll-mt-24 rounded-[2rem] p-6 text-white sm:p-10"
+              style={{ backgroundColor: "var(--panel)" }}
+            >
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <h2 className="font-display text-3xl font-bold">
+                  Selected Works <span style={{ color: "var(--peach)" }}>✦</span>
+                </h2>
+              </div>
+
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {projects.map((p, i) => (
+                  <article
+                    key={`${p.name}-${i}`}
+                    className="relative flex flex-col overflow-hidden rounded-2xl border-2 border-transparent transition duration-300 hover:z-10 hover:scale-[1.03] hover:border-[color:var(--accent)] hover:shadow-xl"
+                    style={{ backgroundColor: "#fff4ec", color: "var(--panel)" }}
                   >
-                    {p.image && (
-                      <img
-                        src={p.image}
-                        alt={p.name}
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                    )}
-                    {!p.image && (
-                      <span className="font-display text-5xl font-bold opacity-40">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    )}
-                    {p.tech[0] && (
-                      <span
-                        className="absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-medium"
-                        style={{ backgroundColor: "#fffaf6", color: "var(--panel)" }}
-                      >
-                        {p.tech[0]}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-semibold">{p.name}</h3>
-                    <div className="mt-1 h-[3.75rem]">
-                      {p.description && (
-                        <p className="line-clamp-3 text-sm opacity-75">{p.description}</p>
+                    <div
+                      className="relative flex h-36 items-end overflow-hidden p-5"
+                      style={{ backgroundColor: TINTS[i % TINTS.length] }}
+                    >
+                      {p.image && (
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      )}
+                      {!p.image && (
+                        <span className="font-display text-5xl font-bold opacity-40">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                      )}
+                      {p.tech[0] && (
+                        <span
+                          className="absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-medium"
+                          style={{ backgroundColor: "#fffaf6", color: "var(--panel)" }}
+                        >
+                          {p.tech[0]}
+                        </span>
                       )}
                     </div>
-                    {p.tech.length > 1 && (
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {p.tech.slice(1).map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full px-2.5 py-0.5 text-xs"
-                            style={{
-                              backgroundColor: "color-mix(in srgb, var(--panel) 12%, transparent)",
-                            }}
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                    {(p.live || p.github) && (
-                      <div className="mt-auto flex items-center justify-between pt-4">
-                        {p.live && (
-                          <a
-                            href={toHref(p.live)}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="rounded-full border px-3 py-1 text-xs font-semibold hover:opacity-70"
-                            style={{
-                              borderColor: "color-mix(in srgb, var(--panel) 35%, transparent)",
-                            }}
-                          >
-                            Demo
-                          </a>
-                        )}
-                        {p.github && (
-                          <a
-                            href={toHref(p.github)}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="ml-auto rounded-full border px-3 py-1 text-xs font-semibold hover:opacity-70"
-                            style={{
-                              borderColor: "color-mix(in srgb, var(--panel) 35%, transparent)",
-                            }}
-                          >
-                            Code
-                          </a>
+
+                    <div className="flex flex-1 flex-col p-5">
+                      <h3 className="font-semibold">{p.name}</h3>
+                      <div className="mt-1 h-[3.75rem]">
+                        {p.description && (
+                          <p className="line-clamp-3 text-sm opacity-75">{p.description}</p>
                         )}
                       </div>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+                      {p.tech.length > 1 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {p.tech.slice(1).map((t) => (
+                            <span
+                              key={t}
+                              className="rounded-full px-2.5 py-0.5 text-xs"
+                              style={{ backgroundColor: "color-mix(in srgb, var(--panel) 12%, transparent)" }}
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {(p.live || p.github) && (
+                        <div className="mt-auto flex items-center justify-between pt-4">
+                          {p.live && (
+                            <a
+                              href={toHref(p.live)}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="rounded-full border px-3 py-1 text-xs font-semibold hover:opacity-70"
+                              style={{ borderColor: "color-mix(in srgb, var(--panel) 35%, transparent)" }}
+                            >
+                              Demo
+                            </a>
+                          )}
+                          {p.github && (
+                            <a
+                              href={toHref(p.github)}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="ml-auto rounded-full border px-3 py-1 text-xs font-semibold hover:opacity-70"
+                              style={{ borderColor: "color-mix(in srgb, var(--panel) 35%, transparent)" }}
+                            >
+                              Code
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </div>
         )}
 
         {/* About and skills */}
         {skills.length > 0 && (
-          <section id="skills" className="mt-20 scroll-mt-24">
-            <Heading>What I do</Heading>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {skills.map((s) => (
-                <div key={s} className="group flex min-w-0 items-center gap-3">
-                  <span
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-semibold text-white"
-                    style={{ backgroundColor: "var(--panel)" }}
-                  >
-                    {s.charAt(0).toUpperCase()}
-                  </span>
-                  <span className="inline-block min-w-0 origin-left font-medium text-slate-900 transition-transform duration-200 [overflow-wrap:anywhere] group-hover:scale-110">
-                    {s}
-                  </span>
-                </div>
-              ))}
+          <section id="skills" className="relative mt-20 scroll-mt-24">
+            {/* Shapes behind the skills */}
+            {/* Shapes behind the skills */}
+            <div aria-hidden="true" className="pointer-events-none hidden md:block">
+              <div
+                className="absolute -right-12 -top-6 h-44 w-44 opacity-50"
+                style={{
+                  backgroundColor: "var(--peach)",
+                  borderRadius: "40% 60% 55% 45% / 55% 40% 60% 45%",
+                }}
+              />
+              <Sparkle className="twinkle absolute right-40 top-6 h-6 w-6" color="var(--sun)" />
+            </div>
+
+            {/* Skills content, above the shapes */}
+            <div className="relative">
+              <Heading>What I do</Heading>
+              <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+                {skills.map((s) => (
+                  <div key={s} className="group flex min-w-0 items-center gap-3">
+                    <span
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-semibold text-white"
+                      style={{ backgroundColor: "var(--panel)" }}
+                    >
+                      {s.charAt(0).toUpperCase()}
+                    </span>
+                    <span className="inline-block min-w-0 origin-left font-medium text-slate-900 transition-transform duration-200 [overflow-wrap:anywhere] group-hover:scale-110">
+                      {s}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         )}

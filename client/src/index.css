@@ -149,7 +149,7 @@
 /* Hover effects */
 .hl {
   transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease,
-    transform 0.3s ease;
+    transform 0.3s ease, scale 0.3s ease;
 }
 .warm-card.hl:hover {
   border-color: var(--accent);
@@ -189,4 +189,36 @@
   .stat-divide > * + * {
     border-left: 1px solid color-mix(in srgb, var(--panel) 25%, transparent);
   }
+}
+
+/* Dark template: technology chips in the hero */
+.chip-hl {
+  transition: border-color 0.2s ease, background-color 0.2s ease, scale 0.2s ease;
+}
+.chip-hl:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+/* Creative template: playful motion */
+@keyframes badge-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  50% { opacity: 0.5; transform: scale(0.7) rotate(20deg); }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.badge-spin { animation: badge-spin 18s linear infinite; }
+.float-y { animation: float-y 5s ease-in-out infinite; }
+.twinkle { animation: twinkle 2.8s ease-in-out infinite; }
+.marquee { animation: marquee 30s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-spin, .float-y, .twinkle, .marquee { animation: none; }
 }

@@ -10,15 +10,7 @@ import { emptyPortfolio, type PortfolioData } from "../types/portfolio";
 import { useLocation, Link } from "react-router-dom";
 import PhotoUpload from "../components/editor/PhotoUpload";
 
-const TABS = [
-  "Personal",
-  "Experience",
-  "Education",
-  "Projects",
-  "Skills",
-  "Certifications",
-] as const;
-
+const TABS = ["Personal", "Experience", "Education", "Projects", "Skills", "Certifications"] as const;
 type Tab = (typeof TABS)[number];
 
 export default function Editor() {
@@ -56,7 +48,7 @@ export default function Editor() {
     load();
   }, []);
 
-    const timer = useRef<number | undefined>(undefined);
+  const timer = useRef<number | undefined>(undefined);
 
   const showNotice = (type: "success" | "error", text: string) => {
     window.clearTimeout(timer.current);
@@ -69,7 +61,7 @@ export default function Editor() {
     try {
       const res = await api.put("/portfolio/me", next);
       setData({ ...emptyPortfolio, ...res.data.portfolio });
-            showNotice("success", `${activeTab} changes saved`);
+      showNotice("success", `${activeTab} changes saved`);
     } catch (err) {
       console.error(err);
       showNotice("error", "Could not save. Please try again.");
@@ -146,9 +138,8 @@ export default function Editor() {
       {notice && (
         <div
           role="status"
-          className={`fixed right-6 top-6 z-50 flex items-center gap-3 rounded-xl px-5 py-3 text-sm font-medium text-white shadow-lg ${
-            notice.type === "success" ? "bg-green-600" : "bg-red-600"
-          }`}
+          className={`fixed right-6 top-6 z-50 flex items-center gap-3 rounded-xl px-5 py-3 text-sm font-medium text-white shadow-lg ${notice.type === "success" ? "bg-green-600" : "bg-red-600"
+            }`}
         >
           <span aria-hidden="true">{notice.type === "success" ? "✓" : "!"}</span>
           <span>{notice.text}</span>

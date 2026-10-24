@@ -1,13 +1,6 @@
 import type { ReactNode } from "react";
 import { GitHubIcon, GlobeIcon, LinkedInIcon, MailIcon, PhoneIcon } from "../Icons";
-import {
-  CertificationList,
-  EducationList,
-  ExperienceList,
-  formatCount,
-  toHref,
-  type TemplateProps,
-} from "./parts";
+import { CertificationList, EducationList, ExperienceList, formatCount, toHref, type TemplateProps } from "./parts";
 
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
@@ -61,8 +54,8 @@ export default function DarkTemplate({ data, photoUrl }: TemplateProps) {
                 {personal.title}
               </span>
             )}
-            <h1 className="font-elegant mt-6 break-words text-4xl font-medium uppercase leading-[1.1] tracking-wide sm:text-5xl lg:text-6xl">
-              <span className="text-[0.5em]">Hi, I’m</span>{" "}
+            <h1 className="mt-5 break-words text-5xl font-bold tracking-tight text-white sm:text-6xl">
+              <span className="font-script text-6xl font-medium sm:text-3xl">Hi, I’m</span>{" "}
               <span className="text-indigo-600">{personal.name}</span>
             </h1>
             {personal.summary && (
@@ -103,7 +96,10 @@ export default function DarkTemplate({ data, photoUrl }: TemplateProps) {
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {skills.slice(0, 8).map((s) => (
-                    <span key={s} className="d-card rounded-md px-3 py-1.5 text-sm text-slate-200">
+                    <span
+                      key={s}
+                      className="d-card chip-hl cursor-default rounded-md px-3 py-1.5 text-sm text-slate-200 hover:scale-110"
+                    >
                       {s}
                     </span>
                   ))}

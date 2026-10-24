@@ -10,11 +10,7 @@ const inputClass =
   "mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-indigo-500";
 
 export default function PersonalForm({ defaultValues, onSave }: Props) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Personal>({ defaultValues });
+  const { register, handleSubmit, formState: { errors } } = useForm<Personal>({ defaultValues });
 
   return (
     <form onSubmit={handleSubmit(onSave)} className="space-y-4">
