@@ -4,7 +4,8 @@ import WarmTemplate from "./templates/WarmTemplate";
 import CreativeTemplate from "./templates/CreativeTemplate";
 import DarkTemplate from "./templates/DarkTemplate";
 
-export default function PortfolioView({ data, photoUrl, theme = defaultTheme }: { data: PortfolioData; photoUrl?: string; theme?: Theme; }) {
+export default function PortfolioView({ data, photoUrl, theme = defaultTheme, projectHref }: { 
+  data: PortfolioData; photoUrl?: string; theme?: Theme; projectHref?: (index: number) => string; }) {
   const Template =
     theme.template === "creative"
       ? CreativeTemplate
@@ -19,7 +20,7 @@ export default function PortfolioView({ data, photoUrl, theme = defaultTheme }: 
       className={`portfolio-theme min-h-screen ${dark ? "portfolio-dark" : ""}`}
       style={{ "--accent": theme.accent } as CSSProperties}
     >
-      <Template data={data} photoUrl={photoUrl} />
+      <Template data={data} photoUrl={photoUrl} projectHref={projectHref} />
     </div>
   );
 }

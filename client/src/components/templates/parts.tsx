@@ -5,6 +5,7 @@ import { GitHubIcon, GlobeIcon, LinkedInIcon, MailIcon, MapPinIcon, PhoneIcon } 
 export interface TemplateProps {
   data: PortfolioData;
   photoUrl?: string;
+  projectHref?: (index: number) => string;
 }
 
 // Adds https:// when missing, so a link can never start with something like "javascript:"

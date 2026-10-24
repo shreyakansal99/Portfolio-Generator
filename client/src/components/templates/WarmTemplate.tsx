@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { AwardIcon, BriefcaseIcon, FolderIcon, GitHubIcon, GlobeIcon, LinkedInIcon, MailIcon, MapPinIcon, PhoneIcon, StarIcon } from "../Icons";
 import { CertificationList, EducationList, ExperienceList, SkillChips, toHref, formatCount, type TemplateProps } from "./parts";
+import { Link } from "react-router-dom";
 
 function Card({ id, eyebrow, title, highlight = false, children }: {
   id?: string;
@@ -21,7 +22,7 @@ function Card({ id, eyebrow, title, highlight = false, children }: {
   );
 }
 
-export default function WarmTemplate({ data, photoUrl }: TemplateProps) {
+export default function WarmTemplate({ data, photoUrl, projectHref }: TemplateProps) {
   const { personal, experience, education, projects, skills, certifications } = data;
 
   const initials = personal.name
@@ -242,7 +243,15 @@ export default function WarmTemplate({ data, photoUrl }: TemplateProps) {
                   </div>
 
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-semibold text-slate-900">{p.name}</h3>
+                    <h3 className="font-semibold text-slate-900">
+                      {projectHref ? (
+                        <Link to={projectHref(i)} className="after:absolute after:inset-0 after:content-['']">
+                          {p.name}
+                        </Link>
+                      ) : (
+                        p.name
+                      )}
+                    </h3>
                     <div className="mt-1 h-[3.75rem]">
                       {p.description && (
                         <p className="line-clamp-3 text-sm text-slate-600">{p.description}</p>

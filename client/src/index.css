@@ -222,3 +222,20 @@
 @media (prefers-reduced-motion: reduce) {
   .badge-spin, .float-y, .twinkle, .marquee { animation: none; }
 }
+
+/* Project page: image frame */
+.proj-img {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.proj-img img {
+  transition: transform 0.5s ease;
+}
+.proj-img:hover {
+  border-color: var(--accent);
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--accent) 30%, transparent);
+  transform: translateY(-4px);
+}
+.proj-img:hover img {
+  transform: scale(1.05);
+}

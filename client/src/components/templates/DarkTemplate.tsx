@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { GitHubIcon, GlobeIcon, LinkedInIcon, MailIcon, PhoneIcon } from "../Icons";
 import { CertificationList, EducationList, ExperienceList, formatCount, toHref, type TemplateProps } from "./parts";
+import { Link } from "react-router-dom";
 
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
@@ -8,7 +9,7 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-export default function DarkTemplate({ data, photoUrl }: TemplateProps) {
+export default function DarkTemplate({ data, photoUrl, projectHref }: TemplateProps) {
   const { personal, experience, education, projects, skills, certifications } = data;
 
   const stats = [
@@ -214,7 +215,15 @@ export default function DarkTemplate({ data, photoUrl }: TemplateProps) {
                     )}
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-elegant text-xl font-semibold text-white">{p.name}</h3>
+                    <h3 className="font-semibold text-white">
+                      {projectHref ? (
+                        <Link to={projectHref(i)} className="after:absolute after:inset-0 after:content-['']">
+                          {p.name}
+                        </Link>
+                      ) : (
+                        p.name
+                      )}
+                    </h3>
                     <div className="mt-1 h-[3.75rem]">
                       {p.description && (
                         <p className="line-clamp-3 text-sm text-slate-400">{p.description}</p>

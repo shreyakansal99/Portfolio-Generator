@@ -260,7 +260,7 @@ export default function Preview() {
           )}
         </div>
 
-        <PortfolioView data={data} photoUrl={photoUrl} theme={theme} />
+        <PortfolioView data={data} photoUrl={photoUrl} theme={theme} projectHref={(i) => `/preview/project/${i}`} />
       </div>
     </div>
   );

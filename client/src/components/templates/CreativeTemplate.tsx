@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 import { GitHubIcon, GlobeIcon, LinkedInIcon, MailIcon, MapPinIcon, PhoneIcon } from "../Icons";
 import { CertificationList, EducationList, ExperienceList, toHref, formatCount, type TemplateProps } from "./parts";
 import { Curl, RoundBadge, Smiley, Sparkle, Squiggle, Starburst } from "./doodles";
+import { Link } from "react-router-dom";
 
 const TINTS = ["#f9a98b", "#fbd46d", "#9fd3c7"];
 
@@ -13,7 +14,7 @@ function Heading({ children }: { children: ReactNode }) {
   );
 }
 
-export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
+export default function CreativeTemplate({ data, photoUrl, projectHref }: TemplateProps) {
   const { personal, experience, education, projects, skills, certifications } = data;
 
   const stats = [
@@ -209,7 +210,15 @@ export default function CreativeTemplate({ data, photoUrl }: TemplateProps) {
                     </div>
 
                     <div className="flex flex-1 flex-col p-5">
-                      <h3 className="font-semibold">{p.name}</h3>
+                      <h3 className="font-semibold">
+                        {projectHref ? (
+                          <Link to={projectHref(i)} className="after:absolute after:inset-0 after:content-['']">
+                            {p.name}
+                          </Link>
+                        ) : (
+                          p.name
+                        )}
+                      </h3>
                       <div className="mt-1 h-[3.75rem]">
                         {p.description && (
                           <p className="line-clamp-3 text-sm opacity-75">{p.description}</p>

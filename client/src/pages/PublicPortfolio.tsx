@@ -36,6 +36,6 @@ export default function PublicPortfolio() {
     );
 
   return (
-    <PortfolioView data={data} photoUrl={photoUrl} theme={theme} />
+    <PortfolioView data={data} photoUrl={photoUrl} theme={theme} projectHref={(i) => `/u/${slug}/project/${i}`} />
   );
 }

@@ -9,6 +9,7 @@ import Editor from "./pages/Editor";
 import PublicPortfolio from "./pages/PublicPortfolio";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Preview from "./pages/Preview";
+import ProjectPage from "./pages/ProjectPage";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -26,6 +27,8 @@ export default function App() {
         <Route path="/editor" element={<PrivateRoute><Editor /></PrivateRoute>} />
         <Route path="/u/:slug" element={<PublicPortfolio />} />
         <Route path="/preview" element={<PrivateRoute><Preview /></PrivateRoute>} />
+        <Route path="/u/:slug/project/:index" element={<ProjectPage mode="public" />} />
+        <Route path="/preview/project/:index" element={<PrivateRoute><ProjectPage mode="preview" /></PrivateRoute>} />
       </Routes>
     </>
   );
