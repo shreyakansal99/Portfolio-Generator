@@ -55,7 +55,8 @@ export function Section({ title, children, variant = "default" }: { title: strin
 }
 
 export function ContactItems({ personal, iconClass = "text-indigo-600", linkClass = "hover:text-indigo-600" }: {
-  personal: PortfolioData["personal"]; iconClass?: string; linkClass?: string; }) {
+  personal: PortfolioData["personal"]; iconClass?: string; linkClass?: string;
+}) {
   const links = [
     { label: "LinkedIn", url: personal.linkedin, icon: <LinkedInIcon /> },
     { label: "GitHub", url: personal.github, icon: <GitHubIcon /> },
